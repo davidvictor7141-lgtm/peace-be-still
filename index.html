@@ -89,6 +89,81 @@
 
     <section class="hero">
       <div class="container hero-inner">
+        <div class="hero-visual" aria-hidden="true">
+          <div class="world-stage">
+            <div class="world-globe">
+              <svg viewBox="0 0 200 200" role="presentation">
+                <defs>
+                  <radialGradient id="worldGlobeFill" cx="32%" cy="28%" r="78%">
+                    <stop offset="0%" stop-color="#7dd3c7"/>
+                    <stop offset="38%" stop-color="#2b8a9a"/>
+                    <stop offset="100%" stop-color="#0b2a3a"/>
+                  </radialGradient>
+                  <radialGradient id="worldGlobeShine" cx="30%" cy="22%" r="42%">
+                    <stop offset="0%" stop-color="rgba(255, 255, 255, 0.55)"/>
+                    <stop offset="100%" stop-color="rgba(255, 255, 255, 0)"/>
+                  </radialGradient>
+                  <linearGradient id="worldGlobeStroke" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="rgba(255, 255, 255, 0.55)"/>
+                    <stop offset="100%" stop-color="rgba(255, 255, 255, 0.08)"/>
+                  </linearGradient>
+                  <clipPath id="worldGlobeClip">
+                    <circle cx="100" cy="100" r="88"/>
+                  </clipPath>
+                </defs>
+                <circle cx="100" cy="100" r="88" fill="url(#worldGlobeFill)"/>
+                <circle cx="100" cy="100" r="88" fill="url(#worldGlobeShine)"/>
+                <g clip-path="url(#worldGlobeClip)" fill="#c6d9a8" stroke="#e4edcc" stroke-opacity=".28" stroke-width=".8">
+                  <path d="M29 59C32 51 39 45 47 42l10-1 8 5 8 3 3 6-7 5-8 1-4 7-9 3-4 9-7 4-5-7-8-2-3-8 4-5z"/>
+                  <path d="M60 96c6-4 13-2 18 2l5 8-3 10-6 8-2 12-7 17-5 11-5-8-1-12-5-10 2-12 6-9 1-10z"/>
+                  <path d="m87 60 5-8 8-5 8 2 6 6-2 7-8 3-6 7-9-2-5-5z"/>
+                  <path d="M103 76c7-5 15-4 20 0l8 7-2 8-7 5-3 10-7 11-5 13-7 10-5-7-1-11-6-10 2-11-4-8 5-9z"/>
+                  <path d="M119 56c7-6 15-7 22-4l11-1 13 6 9 7-4 7-9 2-7-4-8 5-10-3-7 4-10-5-7 1-5-6z"/>
+                  <path d="M150 98c5-4 11-5 16-2l7 6-3 7-10 3-7-4-5-5z"/>
+                  <path d="M145 130c5-4 12-5 17-1l6 7-4 8-9 3-8-4-5-6z"/>
+                </g>
+                <g class="world-globe-grid" clip-path="url(#worldGlobeClip)" fill="none" stroke="rgba(255, 255, 255, 0.15)" stroke-width=".8">
+                  <ellipse cx="100" cy="100" rx="88" ry="32"/>
+                  <ellipse cx="100" cy="100" rx="88" ry="62"/>
+                  <path d="M100 12C77 39 77 161 100 188M100 12C123 39 123 161 100 188"/>
+                  <path d="M12 100h176"/>
+                </g>
+                <circle cx="100" cy="100" r="88" fill="none" stroke="url(#worldGlobeStroke)" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <svg class="world-flight-route" viewBox="0 0 380 380" role="presentation">
+              <defs>
+                <linearGradient id="worldPlaneFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#fff9e9"/>
+                  <stop offset="100%" stop-color="#d3ae67"/>
+                </linearGradient>
+                <filter id="worldPlaneGlow" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="1.8" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <path id="worldFlightPath" d="M18 224 C88 128 278 128 362 224" fill="none" visibility="hidden"/>
+              <path class="world-flight-trail-glow" d="M18 224 C88 128 278 128 362 224"/>
+              <path class="world-flight-trail" d="M18 224 C88 128 278 128 362 224"/>
+              <circle class="world-flight-origin" cx="18" cy="224" r="4"/>
+              <circle class="world-flight-destination" cx="362" cy="224" r="4"/>
+              <g class="world-flight-motion world-flight-motion-primary">
+                <animateMotion dur="10s" begin="0s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#worldFlightPath"/>
+                </animateMotion>
+                <g class="world-flight-plane" filter="url(#worldPlaneGlow)">
+                  <path d="M-29 0-18-2-9-2 5-15q3-3 5 1L7-2 20-1q7 1 10 2-3 1-10 2L7 3l3 12q-2 4-5 1L-9 2-18 2Z" fill="url(#worldPlaneFill)"/>
+                  <path d="m-18-2-9-7 5-1 14 8m-10 4-9 7 5 1 14-8" fill="#d3ae67"/>
+                  <path d="m-12-1 15-1 4-11-1 12-18 2 18 2 1 12-4-11-15-1z" fill="#fffdf5" opacity=".72"/>
+                  <g fill="#b8934e" opacity=".9"><circle cx="-4" cy="0" r=".75"/><circle cx="2" cy="0" r=".75"/><circle cx="8" cy="0" r=".75"/><circle cx="14" cy="0" r=".75"/></g>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
         <div class="hero-copy">
           <span class="eyebrow eyebrow-light">
             <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
@@ -106,13 +181,10 @@
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Embassy appointment support</li>
           </ul>
         </div>
-        <figure class="hero-visual">
-          <img src="dest-canada.jpg" alt="Mountain lake and forest in Canada" fetchpriority="high">
-          <figcaption class="hero-image-note">
-            <span>TRAVEL WITH CONFIDENCE</span>
-            <strong>Thoughtful support, from the first step to take-off.</strong>
-          </figcaption>
-        </figure>
+        <p class="hero-verse">
+          <span class="hero-verse-ref">Psalm 45:4</span>
+          <span class="hero-verse-text">(And in thy majesty ride prosperously).</span>
+        </p>
       </div>
     </section>
 
@@ -183,14 +255,14 @@
           <div>
             <span class="eyebrow">Study &amp; Visit</span>
             <h2>Destinations we support</h2>
-            <p>Study, visit and travel guidance for destinations around the world, including Gulf countries and Beyond.</p>
+            <p>Study, visit and travel guidance for destinations around the world, including Gulf countries and Beyond. Select a country to explore places to visit before you enquire.</p>
           </div>
           <a href="#contact" class="link-arrow">Talk to an advisor <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
 
         <div class="dest-grid">
           <article class="dest-card reveal">
-            <a class="dest-media" href="#contact" aria-label="Enquire about studying in Canada">
+            <a class="dest-media" href="canada.html" aria-label="View more about studying in Canada">
               <img src="dest-canada.jpg" alt="Lake and mountains in Canada" loading="lazy">
               <span class="dest-tag dest-tag-alt">Popular</span>
             </a>
@@ -201,13 +273,13 @@
               </div>
               <div class="dest-foot">
                 <div class="dest-note"><small>We handle</small><strong>Visa &amp; admission</strong></div>
-                <a class="round-btn" href="#contact" aria-label="Enquire about Canada"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="round-btn" href="canada.html" aria-label="View more about Canada"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </div>
           </article>
 
           <article class="dest-card reveal">
-            <a class="dest-media" href="#contact" aria-label="Enquire about studying in France">
+            <a class="dest-media" href="france.html" aria-label="View more about studying in France">
               <img src="dest-france.jpg" alt="Eiffel Tower in Paris, France" loading="lazy">
               <span class="dest-tag">Schengen</span>
             </a>
@@ -218,13 +290,13 @@
               </div>
               <div class="dest-foot">
                 <div class="dest-note"><small>We handle</small><strong>Visa &amp; admission</strong></div>
-                <a class="round-btn" href="#contact" aria-label="Enquire about France"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="round-btn" href="france.html" aria-label="View more about France"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </div>
           </article>
 
           <article class="dest-card reveal">
-            <a class="dest-media" href="#contact" aria-label="Enquire about studying in Italy">
+            <a class="dest-media" href="italy.html" aria-label="View more about studying in Italy">
               <img src="dest-italy.jpg" alt="Coastal village in Italy" loading="lazy">
               <span class="dest-tag">Schengen</span>
             </a>
@@ -235,13 +307,13 @@
               </div>
               <div class="dest-foot">
                 <div class="dest-note"><small>We handle</small><strong>Visa &amp; admission</strong></div>
-                <a class="round-btn" href="#contact" aria-label="Enquire about Italy"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="round-btn" href="italy.html" aria-label="View more about Italy"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </div>
           </article>
 
           <article class="dest-card reveal">
-            <a class="dest-media" href="#contact" aria-label="Enquire about studying in Belgium">
+            <a class="dest-media" href="belgium.html" aria-label="View more about studying in Belgium">
               <img src="dest-belgium.jpg" alt="Historic street in Belgium" loading="lazy">
               <span class="dest-tag">Schengen</span>
             </a>
@@ -252,13 +324,13 @@
               </div>
               <div class="dest-foot">
                 <div class="dest-note"><small>We handle</small><strong>Visa &amp; admission</strong></div>
-                <a class="round-btn" href="#contact" aria-label="Enquire about Belgium"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="round-btn" href="belgium.html" aria-label="View more about Belgium"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </div>
           </article>
 
           <article class="dest-card reveal">
-            <a class="dest-media" href="#contact" aria-label="Enquire about studying in Australia">
+            <a class="dest-media" href="australia.html" aria-label="View more about studying in Australia">
               <img src="dest-australia.jpg" alt="Sydney Opera House in Australia" loading="lazy">
               <span class="dest-tag">Study &amp; Visit</span>
             </a>
@@ -269,13 +341,13 @@
               </div>
               <div class="dest-foot">
                 <div class="dest-note"><small>We handle</small><strong>Visa &amp; admission</strong></div>
-                <a class="round-btn" href="#contact" aria-label="Enquire about Australia"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="round-btn" href="australia.html" aria-label="View more about Australia"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </div>
           </article>
 
           <article class="dest-card reveal">
-            <a class="dest-media" href="#contact" aria-label="Enquire about studying in the USA">
+            <a class="dest-media" href="usa.html" aria-label="View more about studying in the USA">
               <img src="dest-usa.jpg" alt="New York City skyline in the USA" loading="lazy">
               <span class="dest-tag">Study &amp; Visit</span>
             </a>
@@ -286,13 +358,13 @@
               </div>
               <div class="dest-foot">
                 <div class="dest-note"><small>We handle</small><strong>Visa &amp; admission</strong></div>
-                <a class="round-btn" href="#contact" aria-label="Enquire about the USA"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="round-btn" href="usa.html" aria-label="View more about the USA"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </div>
           </article>
 
           <article class="dest-card reveal">
-            <a class="dest-media" href="#contact" aria-label="Enquire about studying in the UK">
+            <a class="dest-media" href="uk.html" aria-label="View more about studying in the UK">
               <img src="dest-uk.jpg" alt="London skyline in the United Kingdom" loading="lazy">
               <span class="dest-tag">Study &amp; Visit</span>
             </a>
@@ -303,7 +375,7 @@
               </div>
               <div class="dest-foot">
                 <div class="dest-note"><small>We handle</small><strong>Visa &amp; admission</strong></div>
-                <a class="round-btn" href="#contact" aria-label="Enquire about the UK"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="round-btn" href="uk.html" aria-label="View more about the UK"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </div>
           </article>
@@ -549,13 +621,13 @@
 
       <div class="footer-col">
         <h3>Study &amp; Visit</h3>
-        <a href="#destinations">Canada</a>
-        <a href="#destinations">France</a>
-        <a href="#destinations">Italy</a>
-        <a href="#destinations">Belgium</a>
-        <a href="#destinations">Australia</a>
-        <a href="#destinations">USA</a>
-        <a href="#destinations">UK</a>
+        <a href="canada.html">Canada</a>
+        <a href="france.html">France</a>
+        <a href="italy.html">Italy</a>
+        <a href="belgium.html">Belgium</a>
+        <a href="australia.html">Australia</a>
+        <a href="usa.html">USA</a>
+        <a href="uk.html">UK</a>
       </div>
 
       <div class="footer-col">
