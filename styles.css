@@ -480,6 +480,7 @@ button {
   padding: 16px 0 0 18px;
   border-top: 1px solid rgba(232, 213, 167, 0.28);
   border-left: 2px solid #e8d5a7;
+  margin-bottom: 40px;
 }
 
 .hero-verse-ref {
