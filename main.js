@@ -3,7 +3,8 @@ const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selec
 
 const pad = (value) => String(value).padStart(2, "0");
 
-$("#year").textContent = new Date().getFullYear();
+const yearEl = $("#year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 const siteHeader = $("#siteHeader");
 const navToggle = $("#navToggle");
@@ -80,6 +81,13 @@ if (countdown) {
   setInterval(tick, 1000);
 }
 
+document.addEventListener("click", (event) => {
+  const card = event.target.closest(".dest-card");
+  if (!card || event.target.closest("a")) return;
+  const link = card.querySelector(".dest-media");
+  if (link) window.location.href = link.getAttribute("href");
+});
+
 const contactForm = $("#contactForm");
 const contactName = $("#cName");
 const contactContact = $("#cContact");
@@ -87,60 +95,80 @@ const contactService = $("#cService");
 const contactMessage = $("#cMessage");
 const contactNote = $("#contactNote");
 
-contactForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const name = contactName.value.trim();
-  const contact = contactContact.value.trim();
-
-  if (!name) {
-    contactNote.textContent = "Please enter your full name.";
-    contactNote.classList.remove("success");
-    contactName.focus();
-    return;
+if (contactForm) {
+  const destinationNames = {
+    canada: "Canada",
+    france: "France",
+    italy: "Italy",
+    belgium: "Belgium",
+    australia: "Australia",
+    usa: "the USA",
+    uk: "the UK",
+  };
+  const destination = new URLSearchParams(window.location.search).get("destination");
+  if (destination && destinationNames[destination.toLowerCase()]) {
+    const destinationName = destinationNames[destination.toLowerCase()];
+    contactService.value = "Study & Visit";
+    contactMessage.value = `I'd like to know more about studying or visiting ${destinationName}.`;
   }
 
-  if (!contact) {
-    contactNote.textContent = "Please add a phone number or email so we can reach you.";
-    contactNote.classList.remove("success");
-    contactContact.focus();
-    return;
-  }
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const name = contactName.value.trim();
+    const contact = contactContact.value.trim();
 
-  const lines = [
-    "Hello Peace Be Still Travels & Consult,",
-    "",
-    `Name: ${name}`,
-    `Contact: ${contact}`,
-    `Service: ${contactService.value}`,
-  ];
-  const message = contactMessage.value.trim();
-  if (message) lines.push(`Message: ${message}`);
+    if (!name) {
+      contactNote.textContent = "Please enter your full name.";
+      contactNote.classList.remove("success");
+      contactName.focus();
+      return;
+    }
 
-  const url = `https://wa.me/2349156432511?text=${encodeURIComponent(lines.join("\n"))}`;
-  window.open(url, "_blank", "noopener");
-  contactNote.textContent = "Opening WhatsApp with your enquiry. You can also call 0915 643 2511.";
-  contactNote.classList.add("success");
-});
+    if (!contact) {
+      contactNote.textContent = "Please add a phone number or email so we can reach you.";
+      contactNote.classList.remove("success");
+      contactContact.focus();
+      return;
+    }
+
+    const lines = [
+      "Hello Peace Be Still Travels & Consult,",
+      "",
+      `Name: ${name}`,
+      `Contact: ${contact}`,
+      `Service: ${contactService.value}`,
+    ];
+    const message = contactMessage.value.trim();
+    if (message) lines.push(`Message: ${message}`);
+
+    const url = `https://wa.me/2349156432511?text=${encodeURIComponent(lines.join("\n"))}`;
+    window.open(url, "_blank", "noopener");
+    contactNote.textContent = "Opening WhatsApp with your enquiry. You can also call 0915 643 2511.";
+    contactNote.classList.add("success");
+  });
+}
 
 const newsletterForm = $("#newsletterForm");
 const newsletterNote = $("#newsletterNote");
 const emailInput = $("#email");
 
-newsletterForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const email = emailInput.value.trim();
-  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-  if (!valid) {
-    newsletterNote.textContent = "Please enter a valid email address.";
-    newsletterNote.classList.remove("success");
-    emailInput.focus();
-    return;
-  }
-  newsletterNote.textContent = "You're on the list! Check your inbox to confirm your subscription.";
-  newsletterNote.classList.add("success");
-  emailInput.value = "";
-  showToast("Subscribed — travel updates are on their way.");
-});
+if (newsletterForm) {
+  newsletterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const email = emailInput.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if (!valid) {
+      newsletterNote.textContent = "Please enter a valid email address.";
+      newsletterNote.classList.remove("success");
+      emailInput.focus();
+      return;
+    }
+    newsletterNote.textContent = "You're on the list! Check your inbox to confirm your subscription.";
+    newsletterNote.classList.add("success");
+    emailInput.value = "";
+    showToast("Subscribed — travel updates are on their way.");
+  });
+}
 
 const revealItems = $$(".reveal");
 if ("IntersectionObserver" in window) {
